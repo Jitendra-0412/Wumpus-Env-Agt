@@ -1,9 +1,22 @@
-# Wumpus-Env-Agt
-This project is a Python implementation of the Wumpus World problem from the Artificial Intelligence, where a dynamic environment is created using user-defined inputs. The project is divided into three parts: environment creation, knowledge-based logical reasoning, and grid-based visualization, demonstrating percepts like breeze and stench with inference results.
+# Probabilistic Wumpus World (Python Implementation)
 
-# Wumpus World
+A Python implementation of the Probabilistic Wumpus World using belief updates and normalized joint probabilities. This project demonstrates how an agent reasons under uncertainty using probability instead of pure logical inference.
 
-## Part 1: Environment (environment.py)
+The Wumpus World is a classic Artificial Intelligence problem used to demonstrate:
+- Knowledge representation.
+- Reasoning under uncertainty.
+- Bayesian inference.
+- Probabilistic belief updates
+  
+## In this implementation:
+- Probabilistic belief updates
+- The environment generates pits, breeze, stench, gold, and Wumpus.
+- The agent maintains probabilistic beliefs about pits.
+- The system computes:
+- Prior probabilities, Updated belief state, Normalized joint probabilities.
+- The world is visualized using matplotlib.
+
+## Part 1: enviprob.py – Environment
 
 This file is responsible for **creating and managing the Wumpus World environment**.
 
@@ -11,20 +24,19 @@ This file is responsible for **creating and managing the Wumpus World environmen
 - Accepts positions of the agent, Wumpus, gold, and pits.
 - Stores pit locations explicitly (P11, P12, P21, etc.).
 - Identifies neighboring cells.
-- Generates the **breeze percept** when a pit is present in an adjacent cell.
-- Generates the **stench percept** when a wumpus is present in an adjacent cell.
 
 This module represents the *actual world* from which the agent receives information.
 
-## Part 2: Agent / Knowledge Base (agent.py)
+## Part 2: agenprob.py – Probabilistic Agent
 
-This file implements a **knowledge-based agent** using propositional logic.
+This file is responsible for:
 
-- Defines logical symbols for pits and breezes.
-- Evaluates each rule individually.
-- Combines all rules to determine whether the knowledge base is consistent.
-
-The values are used to clearly demonstrate **logical inference**, similar to textbook and Lecture-4.
+- Assigning prior pit probabilities.
+- Updating beliefs using percepts.
+- Computing joint probabilities.
+- Returning belief state.
+- 
+# The agent does not know pit locations directly. It reasons probabilistically using observed breezes.
 
 ## Part 3: Visualization & Execution (wumpus.py)
 
@@ -35,3 +47,20 @@ This is the **main execution file** of the project.
 - Adds percepts like Breeze (B) and Stench (S).
 - Visualizes the world using a Cartesian grid with Matplotlib.
 - Executes the knowledge base and prints inference results.
+# Responsible for:
+- Initializing environment and agent.
+- Updating beliefs.
+- Printing:
+- P(Pit(x,y))
+- P(Pit(x,y) | Known, Unknown)
+  
+# Query
+- Query=Pit(x,y) 
+- Meaning:Is there a pit in cell (x,y)?
+
+# Joint Probability
+- P(Query,Known,Unknown)
+- Where:
+- Query → Pit(x,y)
+- Known → Observed breezes
+- Unknown → Other pit variables
