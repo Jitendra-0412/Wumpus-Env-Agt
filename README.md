@@ -1,4 +1,4 @@
-# Probabilistic Wumpus World (Python Implementation)
+# Probabilistic Wumpus World 
 
 A Python implementation of the Probabilistic Wumpus World using belief updates and normalized joint probabilities. This project demonstrates how an agent reasons under uncertainty using probability instead of pure logical inference.
 
